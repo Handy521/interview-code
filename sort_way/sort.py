@@ -8,7 +8,7 @@ Created on Sat Feb 16 17:25:02 2019
 '''
 sort_way
 '''
-#import numpy as np
+import numpy as np
 
 def swap(a,b):
     temp=a
@@ -21,8 +21,8 @@ def bubble_sort(list1):
     冒泡排序,最大的沉底O(N^2)
     """
     n=len(list1)
-    for i in range(n-1,-1,-1):
-        for j in range(i):
+    for i in range(n-1,0,-1):#从n-1(初始位置闭合)到 1
+        for j in range(i):#0~n-2...0~1
             if (list1[j]>list1[j+1]):#相邻的比较
                 list1[j],list1[j+1]=swap(list1[j],list1[j+1])
     return list1
@@ -46,6 +46,8 @@ def binary_search(list2,des):
 def search_sort(list1):
     """
     选择排序，每次选择最小的方前面O(N^2)
+    0~N-1
+    1~N-1
     """
     n=len(list1) 
     for i in range(n):
@@ -57,10 +59,11 @@ def search_sort(list1):
 def insert_sort(list1):
     """
     从第一个元素开始，j的范围就是前面位置，相邻比较O(N)~O(N^2)最差估计时间复杂度
+    0~1，0~1~2，0~1~2~3...
     """
     n=len(list1)
-    for i in range(n):
-        for j in range((i-1),-1,-1):#倒序从后（-1能取到边界值）向前，步长-1，最后为0
+    for i in range(1,n):
+        for j in range((i-1),-1,-1):#倒序从后（-1能取到边界值）向前，步长-1，最后为0(最后值为-1才能取到0)
             if (list1[j]>list1[j+1]):#相邻的比较
                 list1[j],list1[j+1]=swap(list1[j],list1[j+1])
     return list1 
@@ -78,14 +81,14 @@ def get_max(list1,L,R):
     
         
     
-list1=[2,7,5,4,1,5,6,8,3]
-#mearge=code_01_Mergesort()          
-#mearge.mergeSort(list1)        
+#list1=[2,7,5,4,1,5,6,8,3]
+#list1= [7, 1, 2, 2, 3, 4, 5, 6, 7, 8]
+random_list=np.random.randint(10,size=4)
+list1=list(random_list)       
 #a=bubble_sort(list1)
 #a=search_sort(list1)
-#a=insert_sort(list1)
+a=insert_sort(list1)
 #print(a)
-#b=binary_search(a,4)
-#print(b)
-a=get_max(list1,0,len(list1)-1)
-#mergeSort(list1)
+b=binary_search(a,4)
+print(b)
+amax=get_max(list1,0,len(list1)-1)
